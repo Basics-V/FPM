@@ -2,9 +2,6 @@ Segments:
   - ID: 0x0
     Name: ARM9
     Type: EXECUTABLE
-  - ID: 0x1
-    Name: OVL_10
-    Type: EXECUTABLE
 
 Symbols:
   - Name: bwInjectBootCode

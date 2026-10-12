@@ -26,7 +26,6 @@ lnks = $(link_dir)/hooks.ld
 hdrs = $(wildcard $(incl_dir)/*.h) $(wildcard $(incl_dir)/overlay/*.h)
 esdb = $(pmc_dir)/$(ROM_CODE).yml
 y9   = $(data_dir)/y9.json
-y9dt = $(build_data)/y9.json
 
 fsrcs = $(wildcard $(fpm_dir)/*.c) $(wildcard $(fpm_dir)/*.cpp)
 fobjs = $(addprefix $(code_dir)/, $(notdir $(patsubst %.cpp, %.o, $(patsubst %.c, %.o, $(fsrcs)))))
@@ -89,12 +88,10 @@ $(venv_dir):
 	@ echo "[^] Installing requirements..."
 	@ $(vpython) -m pip install -r $(pyreqs) > /dev/null
 
-$(y9dt): $(felf)
+merge_y9s: $(felf)
 	@ echo "[%] Merging y9s..."
 	@ mkdir -p $(dir $@)
-	@ $(eval fpm_size := $(shell stat -f %z $(fpm_bin)))
-	@ sed 's/%d/'"$(fpm_size)"'/g' $(y9) > $@
-	@ $(vpython) $(nitro_y9) $(nitro_project) $@
+	@ $(eval fpm_size := $(shell $(vpython) $(nitro_y9) $(fpm_bin) $(nitro_project) $(y9)))
 
 .PRECIOUS: $(lnks)
 $(link_dir)/hooks.ld: $(hdrs) $(venv_dir)
@@ -140,7 +137,7 @@ $(obj_dir)/%.elf: $(obj_dir)/%.o $(lnks) $(obj_dir)/symbols.o $(fsym)
 		dd if=$(@:.elf=.bin) of=$$location bs=1 seek=$$offs10even conv=notrunc status=none; \
 	done
 
-$(obj_dir)/%.o: %.c $(hdrs) $(y9dt)
+$(obj_dir)/%.o: %.c $(hdrs) merge_y9s
 	@ echo "[+] Compiling hook $<..."
 	@ mkdir -p $(@D)
 	@ $(gcc) $(c_flags) -DMODULE_SIZE=$(fpm_size) -c $< -o $@
