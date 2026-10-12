@@ -41,15 +41,24 @@ nitro_project = $(unpack_dir)/$(ROM_CODE).json
 fpm_bin       = $(unpack_dir)/overlay/main_00ED.bin
 fpm_size      = 0
 
+# Commands
 gcc     = arm-none-eabi-gcc
 ld      = arm-none-eabi-ld
 as      = arm-none-eabi-as
 objcopy = arm-none-eabi-objcopy
 objdump = arm-none-eabi-objdump
-python  = python3
-vpython = $(venv_dir)/bin/$(python)
 ntrpck  = nitropacker
 
+# OS-specific commands
+ifeq ($(OS),Windows_NT)
+	python  = python
+	vpython = $(venv_dir)/Scripts/$(python)
+else
+	python  = python3
+	vpython = $(venv_dir)/bin/$(python)
+endif
+
+# Tools
 y9_tool   := $(tools_dir)/y9.py
 nitro_y9  := $(tools_dir)/nitro_y9.py
 esdb_tool := $(tools_dir)/esdb.py
@@ -127,7 +136,7 @@ $(obj_dir)/%.elf: $(obj_dir)/%.o $(lnks) $(obj_dir)/symbols.o $(fsym)
 		offs10=$$(printf "%d" "$$offs"); \
 		offs10even=$$(( offs10 & -2 )); \
 		$(objcopy) -O binary --only-section=.text.$$hook $@ $(@:.elf=.bin); \
-		length=$$(stat -f %z $(@:.elf=.bin)); \
+		length=$$(wc -c < $(@:.elf=.bin) | tr -d ' '); \
 		binfile=$(notdir $(@:.elf=.bin)); \
 		case $$(basename "$@") in \
 			fpm*) location="$(unpack_dir)/arm9.bin";; \
