@@ -1,5 +1,5 @@
 // fpm.c - fixed program module
-// Authors: MCMi460
+// Authors: MCMi460, HelloOO7, PlatinumMaster
 
 #include "util.h"
 

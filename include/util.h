@@ -1,3 +1,6 @@
+// util.h
+// Authors: MCMi460
+
 #pragma once
 
 // Macros

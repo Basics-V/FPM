@@ -1,3 +1,6 @@
+# hook_filter.py
+# Authors: MCMi460
+
 import sys
 import re
 

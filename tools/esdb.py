@@ -1,3 +1,6 @@
+# esdb.py
+# Authors: MCMi460
+
 import sys
 import yaml
 import json

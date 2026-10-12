@@ -1,3 +1,6 @@
+# FPM Makefile - Fixed Program Module Makefile
+# Authors: MCMi460
+
 ROM_CODE := IRBO# IRAO, ...
 PROJECT  := FPM
 

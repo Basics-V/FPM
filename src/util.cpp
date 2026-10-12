@@ -1,3 +1,6 @@
+// util.cpp
+// Authors: MCMi460
+
 #include "util.h"
 
 #ifdef MELONDS

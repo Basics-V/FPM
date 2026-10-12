@@ -1,3 +1,6 @@
+# nitro_y9.py
+# Authors: MCMi460
+
 import json
 import sys
 
