@@ -28,8 +28,8 @@ void FULL_COPY_main_0x6(void) {
 __attribute__((naked, target("thumb"), aligned(2)))
 void FULL_COPY_GetUserMemRegionDefaultStart_0xB0(void) {
     __asm__ volatile (
-        // 0x2213D20 + MODULE_SIZE = NEW_HEAP_START
-        ".word " STR(0x2213D20 + MODULE_SIZE)
+        // 0x2213D40 + MODULE_SIZE = NEW_HEAP_START
+        ".word " STR(0x2213D40 + MODULE_SIZE)
     );
 }
 
