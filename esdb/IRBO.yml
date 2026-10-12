@@ -1,0 +1,27 @@
+Segments:
+  - ID: 0x0
+    Name: ARM9
+    Type: EXECUTABLE
+
+Symbols:
+  - Name: bwInjectBootCode
+    Segment: 0x0
+    Address: 0x200400D
+  - Name: main
+    Segment: 0x0
+    Address: 0x2005125
+  - Name: GFLAppInit
+    Segment: 0x0
+    Address: 0x200545D
+  - Name: sys_load_overlay
+    Segment: 0x0
+    Address: 0x2079264
+  - Name: g_OvlMax
+    Segment: 0x0
+    Address: 0x2078EA8
+  - Name: GetUserMemRegionDefaultStart
+    Segment: 0x0
+    Address: 0x2086694
+  - Name: vsnprintf
+    Segment: 0x0
+    Address: 0x20944CC
