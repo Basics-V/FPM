@@ -67,9 +67,14 @@ hookfilt  := $(tools_dir)/hook_filter.py
 venv_dir = $(build_dir)/venv
 pyreqs   = $(tools_dir)/requirements.txt
 
-c_flags  := -mthumb -march=armv5t -nostdlib -ffunction-sections -O2 $(addprefix -I, $(dir $(hdrs))) -Wa,-W
+c_flags  := -mthumb -march=armv5t -nostdlib -ffunction-sections -fno-exceptions -O2 $(addprefix -I, $(dir $(hdrs))) -Wa,-W
 ld_flags := --no-warn-rwx-segments
 as_flags := 
+
+defines ?=
+ifneq ($(defines),)
+	c_flags += $(addprefix -D,$(defines))
+endif
 
 vpath %.c   $(vfs_dir)
 vpath %.c   $(ovl_dir)

@@ -3,9 +3,9 @@
 
 #include "util.h"
 
-#ifdef MELONDS
-    #define MELON_PREFIX "~ "
+#ifdef PRINT_PREFIX
     // stdbuf -oL ./melonDS | sed -unE "/abort/p; s/^~ //p"
+    #define PREFIX "~ "
 #endif
 
 #include <cstdarg>
@@ -25,9 +25,9 @@ namespace Mi4 {
             volatile char* nocashCharOut = (volatile char*)0x4FFFA1C;
             while (*str) {
                 *nocashCharOut = *str;
-                #ifdef MELON_PREFIX
+                #ifdef PRINT_PREFIX
                     if (*str == '\n' && *(str + 1)) {
-                        Printf_Core(MELON_PREFIX);
+                        Printf_Core(PREFIX);
                     }
                 #endif
                 str++;
@@ -37,8 +37,8 @@ namespace Mi4 {
 
     // HelloOO7/NitroKernel/src/kPrint.cpp
     void Printf(const char* format, ...) {
-        #ifdef MELON_PREFIX
-            Printf_Core(MELON_PREFIX);
+        #ifdef PRINT_PREFIX
+            Printf_Core(PREFIX);
         #endif
         va_list args;
         va_start(args, format);
