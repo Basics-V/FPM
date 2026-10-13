@@ -183,7 +183,7 @@ $(code_dir)/%.o: %.cpp $(hdrs)
 	@ $(gcc) $(c_flags) -c $< -o $@
 
 clean:
-	@ rm -rf $(obj_dir) $(code_dir) $(link_dir) $(unpack_dir) $(target) $(build_data)
+	@ rm -rf $(obj_dir) $(code_dir) $(link_dir) $(unpack_dir) $(build_dir)/*.nds $(build_data)
 
 purge:
 	rm -rf $(build_dir)
