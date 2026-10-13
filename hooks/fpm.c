@@ -28,6 +28,10 @@ void FULL_COPY_main_0x6(void) {
 __attribute__((naked, target("thumb"), aligned(2)))
 void FULL_COPY_GetUserMemRegionDefaultStart_0xB0(void) {
     __asm__ volatile (
+        // IRAO: 0x2213D40
+        // IRBO: 0x2213D20
+        // IRAI: 0x2213C40
+        // Take the greatest, IRAO, for multiregional support
         // 0x2213D40 + MODULE_SIZE = NEW_HEAP_START
         ".word " STR(0x2213D40 + MODULE_SIZE)
     );
