@@ -1,8 +1,5 @@
 // Sourced from ds-pokemon-hacking/swan/swantypes.h
 
-#ifndef __WBTYPES_H
-#define __WBTYPES_H
-
 #ifdef __cplusplus
 
 #include <cstdbool>
@@ -23,10 +20,12 @@
 #define STRUCT_DECLARE(tag) struct tag;
 #define UNION_DECLARE(tag) union tag;
 #define ENUM_DECLARE(tag) enum tag : u32;
+#define ENUM_DECLARE_EX(tag, type) enum tag : type;
 #else
 #define STRUCT_DECLARE(tag) typedef struct tag tag;
 #define UNION_DECLARE(tag) typedef union tag tag;
 #define ENUM_DECLARE(tag) typedef enum tag tag;
+#define ENUM_DECLARE_EX(tag, type) enum tag : type; typedef enum tag tag;
 #endif
 
 typedef uint64_t u64;
@@ -74,12 +73,12 @@ typedef int32_t b32; //32-bit bool
 #define WB_CPPTYPE(ns, typename) namespace ns { typedef typename typename; }
 #define WB_CPPTYPE_EX(ns, cppTypename, typename) namespace ns { typedef typename cppTypename; }
 #define WB_CPPONLY(code) code
+#define WB_NAMESPACE(ns, localname) namespace ns { struct localname; }
 #else
 #define C_DECL_BEGIN
 #define C_DECL_END
 #define WB_CPPTYPE(ns, typename)
 #define WB_CPPTYPE_EX(ns, cppTypename, typename)
 #define WB_CPPONLY(code)
-#endif
-
+#define WB_NAMESPACE(ns, localname)
 #endif
